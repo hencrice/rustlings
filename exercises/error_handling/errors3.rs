@@ -5,12 +5,16 @@
 // What should we do instead? Scroll for hints!
 
 use std::num::ParseIntError;
+use std::process;
 
 fn main() {
     let mut tokens = 100;
-    let pretend_user_input = "8";
+    let pretend_user_input = "not a number lala";
 
-    let cost = total_cost(pretend_user_input)?;
+    let cost = match total_cost(pretend_user_input) {
+        Ok(cost) => cost,
+        Err(e) => process::exit(1),
+    };
 
     if cost > tokens {
         println!("You can't afford that many!");
